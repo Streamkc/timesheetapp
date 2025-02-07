@@ -1,5 +1,6 @@
 build/
 .vscode/
 .gradle/
+/.DS_Store/
 gradle/
 src/frontend/node_modules/

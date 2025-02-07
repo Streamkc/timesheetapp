@@ -1,0 +1,105 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+html,body{
+    background-color: grey;
+    width: 100%;
+    height: 150%;
+    scroll-behavior: smooth;
+    justify-content: center;
+    align-items: center;
+}
+
+div{
+    width: 100%;
+}
+
+ul{
+    list-style-type:none;
+}
+
+a{
+    text-decoration: none;
+}
+
+img{
+    overflow: hidden;
+    objec†-fit: cover;
+    padding: 1 em;
+}
+
+#container{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    float: none;
+    width: 100%;
+    overflow: hidden;
+}
+
+#content{
+    background-color: pink;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#mybuild{
+    background-color: orange;
+    flex:1;
+    width: 100%;
+}
+
+#partslist{
+    background-color: PeachPuff;
+    flex:1;
+    width: 100%;
+}
+
+#myinfo{
+    background-color: Peru;
+    flex:1;
+    width: 100%;
+}
+
+#banner{
+    background-color: SandyBrown;
+    width: 100%;
+    height: 5 em;
+    justify-align: center;
+    align-item: center;
+}
+
+#banner h1{
+    background: linear-gradient(45deg, orange, black);
+    color: black;
+}
+
+#footer{
+    background-color: SandyBrown;
+    width: 100%;
+    height: 5 em;
+    padding-top: 1em;
+}
+
+.nav{
+    background-color: tan;
+    width: 100%;
+    padding-top: 1em;
+}
+.nav ul{
+    list-style-type: none;
+}
+.nav li{
+    display: inline;
+    padding: 1em;
+}
+.nav li:hover{
+    background-color: wheat;
+    display: inline;
+    padding: 1em;
+}

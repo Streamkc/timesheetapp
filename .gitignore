@@ -2,3 +2,4 @@ build/
 .vscode/
 .gradle/
 gradle/
+src/frontend/node_modules/

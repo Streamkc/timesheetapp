@@ -1,6 +1,8 @@
 import React from 'react';
 import {useRef } from 'react';
 import Timesheet from './timesheet';
+import { EmployeeAdd, EmployeeAssignments, EmployeeList } from './employee';
+import { ProjectAdd, ProjectList } from './project';
 
 const Nav= ()=>{
     const buildpageRef= useRef(null);
@@ -86,27 +88,6 @@ const Myinfo= ()=>{
         <div> <h3>Info for tech used </h3>
         </div>
 
-        <ol>
-        <div> React js for component rendering.
-        </div>
-        <div> Single CSS file is used for styling
-        </div>
-        <div> Webpack for bundling js.
-        </div>
-        <div> public path exposed;
-        </div>
-        <div> fetch json file from public path;
-        </div>
-        <div> public path is inconsistent bewteen dev and prod fixed 
-        </div>
-        <div> TODO:
-        </div>
-        <div> include redux and ant design? 
-        </div>
-        <div> 
-        </div>
-        </ol>
-        
     </div>
     );
 }
@@ -116,6 +97,10 @@ const Content= ()=>{
     <div id="content">
     <h1>Content</h1>
     <Timesheet />
+    <EmployeeList />
+    <EmployeeAdd />
+    <ProjectList />
+    <ProjectAdd />
     </div>
     );
 }

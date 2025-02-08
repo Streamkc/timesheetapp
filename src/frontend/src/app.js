@@ -1,37 +1,10 @@
 import React from 'react';
-import {useRef } from 'react';
-import Timesheet from './timesheet';
+import { Routes, Route, Link  } from 'react-router-dom';
 import { EmployeeAdd, EmployeeEdit, EmployeeList } from './employee';
 import { ProjectAdd, ProjectList } from './project';
+import { AssignmentList, AssignmentAdd } from './assignment';
+import { Timesheet, ProjectTally } from './timesheet';
 
-const Nav= ()=>{
-    const buildpageRef= useRef(null);
-    const partslistpageRef= useRef(null);
-    const myinfopageRef= useRef(null);
-    const showpage=()=>{
-        console.log("showpage");
-    }
-
-    return(
-    <div className="nav"> 
-        <ol>
-            <li>
-            <a ref={buildpageRef} href="#mybuid" onClick={()=>showpage("mybuild")}>
-            My Build
-            </a> 
-            </li>
-            <li>  
-            <a ref={partslistpageRef} href="#partslist" onClick={()=>showpage("partslist")}>
-            Parts
-            </a> 
-            </li>
-            <li> 
-            <a ref={myinfopageRef} href="#myinfo" onClick={()=>showpage("myinfo")}>My Info</a> 
-            </li>
-        </ol>
-    </div>
-    );
-}
 
 const Banner= ()=>{
     return(
@@ -95,13 +68,15 @@ const Myinfo= ()=>{
 const Content= ()=>{
     return(
     <div id="content">
-    <h1>Content</h1>
+    <Banner />
     <Timesheet />
     <EmployeeList />
     <EmployeeAdd />
     <EmployeeEdit />
     <ProjectList />
     <ProjectAdd />
+    <AssignmentsList />
+    <Footer />
     </div>
     );
 }
@@ -114,12 +89,19 @@ const App= ()=>{
     window.onbeforeunload=onunloadevent;
 */
     return (
-        <div id="container">
-            <Banner />
-            <Content />
-            <Myinfo />
-            <Footer />
-        </div>
+        <>
+            <Routes>
+                <Route path="/" element={<Timesheet />} />
+                <Route path="/projectTally" element={<ProjectTally />} />
+                <Route path="/employeeListPage" element={<EmployeeList />} />
+                <Route path="/employeeCreatePage" element={<EmployeeAdd />} />
+                <Route path="/employeeEditPage" element={<EmployeeEdit />} />
+                <Route path="/projectListPage" element={<ProjectList />} />
+                <Route path="/projectCreatePage" element={<ProjectAdd />} />
+                <Route path="/assignmentListPage" element={<AssignmentList />} />
+                <Route path="/assignmentCreatePage" element={<AssignmentAdd/>} />
+            </Routes>
+        </>
     )
 }
 

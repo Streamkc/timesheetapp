@@ -1,7 +1,6 @@
 package com.etact.timesheetapp;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.stereotype.Controller;
 
+import com.etact.timesheetapp.entity.AssignmentEntity;
 import com.etact.timesheetapp.entity.EmployeeEntity;
 import com.etact.timesheetapp.entity.ProjectEntity;
+import com.etact.timesheetapp.vo.timesheetProjectVo;
+import com.etact.timesheetapp.vo.timesheetTallyVo;
 
 @RestController
 public class TimesheetController{
@@ -35,6 +35,38 @@ public class TimesheetController{
 	@RequestMapping("/welcome")	
     public String welcome(){
         return "welcome";
+
+    }
+
+	@GetMapping("/timesheetTally")	
+    public timesheetTallyVo getTimesheetTally(){
+        timesheetTallyVo ret= service.getTimesheetTallyVo();
+        return ret;
+    }
+
+	@GetMapping("/timesheetProjectTally")	
+    public List<timesheetProjectVo> getTimesheetProjectTally(){
+        ArrayList<timesheetProjectVo> ret= new ArrayList<timesheetProjectVo>(); 
+        service.getProjectList().forEach(project->{
+            timesheetProjectVo projectVo= service
+                                .getProjectTallyVo(project.getProject_id());
+            ret.add(projectVo);
+        });
+        return ret;
+    }
+
+	@GetMapping("/assignmentList")	
+    public List<AssignmentEntity> assignmentList(){
+        List<AssignmentEntity> ret= service.getAssignmentList();
+        return ret;
+    }
+
+    @PostMapping("/assignmentCreate")
+    public AssignmentEntity asssignmentCreate(
+        @RequestBody
+        AssignmentEntity entry) {
+        AssignmentEntity ret= service.addAssignment(entry);
+        return ret;
     }
 
 	@GetMapping("/projectList")	

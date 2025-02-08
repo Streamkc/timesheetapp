@@ -1,6 +1,8 @@
-import React, { use } from "react";
+import React from "react";
 import { useState, useEffect} from "react";
-import { Button, Form, Input, Select, Space, Table, Tag} from 'antd';
+import { Button, Form, Input, Space, Table } from 'antd';
+import { message } from 'antd';
+import  Nav from 'nav.js'
 
     const layout = {
         labelCol: {
@@ -57,6 +59,7 @@ const EmployeeList = ()=>{
 
     return (
         <>
+        <Nav />
         <h2>Employee List</h2>
         <Table dataSource={list} columns={columns} />
         </>
@@ -67,15 +70,24 @@ const EmployeeAdd = ()=>{
 
     const [form] = Form.useForm();
     const onFinish = (values) => {
-        fetch("/employeeCreate",
-             {
-                body:JSON.stringify(values),
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json",
-                }
-            });
-        console.log(values);
+
+        try{
+            fetch("/employeeCreate",
+                {
+                    body:JSON.stringify(values),
+                    method:"POST",
+                    headers:{
+                        "Content-Type":"application/json",
+                    }
+                });
+            console.log(values);
+            message.success('Employee added successfully',
+                             3);
+            form.resetFields();
+        }catch(error){
+            message.error('Employee not added',3);
+            console.log(error);
+        }
     }
 
     const onReset = () => {
@@ -84,6 +96,7 @@ const EmployeeAdd = ()=>{
 
     return (
         <>
+        <Nav />
         <h3>Add Employee</h3>
         <Form
             {...layout} 
@@ -93,10 +106,20 @@ const EmployeeAdd = ()=>{
                 maxWidth: 600,
             }}
         >
-        <Form.Item label="First Name" name="first_name">
+        <Form.Item 
+            label="First Name" 
+            name="first_name"
+            rules={[{ required: true, 
+                      message: 'Please input first name!' }]}
+        >
             <Input />
         </Form.Item>
-        <Form.Item label="Last Name" name="last_name">
+        <Form.Item 
+            label="Last Name" 
+            name="last_name" 
+            rules={[{ required: true, 
+                      message: 'Please input last name!' }]}
+        >
             <Input />
         </Form.Item>
         <Form.Item {...tailLayout}>
@@ -119,6 +142,7 @@ const EmployeeEdit = ()=>{
     }
     return (
         <>
+        <Nav />
         <h2>Edit Employee</h2>
         <Form
         {...layout} 
@@ -150,6 +174,7 @@ const EmployeeEdit = ()=>{
 const EmployeeAssignments = ()=>{   
     return (
         <>
+        <Nav />
         <h1>Employee Assignments</h1>
         </>
     )

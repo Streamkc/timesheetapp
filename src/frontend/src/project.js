@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect} from "react";
-import { Button, Form, Input, Select, Space, Table, Tag} from 'antd';
+import { Button, Form, Input,  Space, Table, message } from 'antd';
+import  Nav from 'nav.js'
 
     const layout = {
         labelCol: {
@@ -50,6 +51,7 @@ const ProjectList = ()=>{
 
     return (
         <>
+        <Nav />
         <h2>Project List</h2>
         <Table dataSource={list} columns={columns} />
         </>
@@ -60,15 +62,25 @@ const ProjectAdd = ()=>{
 
     const [form] = Form.useForm();
     const onFinish = (values) => {
-        fetch("/projectCreate",
+        try{
+            fetch("/projectCreate",
              {
                 body:JSON.stringify(values),
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
                 }
-            });
-        console.log(values);
+            })
+            .then(
+                message.success("Project Added", 10),
+                console.log("Project Not Added")
+            );
+            console.log(values);
+            form.resetFields();
+        }
+        catch(error){
+            message.error("Project Not Added",10);
+        }
     }
 
     const onReset = () => {
@@ -76,7 +88,7 @@ const ProjectAdd = ()=>{
     }
     return (
         <>
-        <h1>Add Project</h1>
+        <Nav />
         <Form
             {...layout} 
             form={form}
@@ -85,7 +97,15 @@ const ProjectAdd = ()=>{
                 maxWidth: 600,
             }}
         >
-        <Form.Item label="Project Name" name="project_name">
+        <Space>
+        <h2>Add Project</h2>
+        </Space>
+        <Form.Item 
+            label="Project Name" 
+            name="project_name"
+            rules={[{ required: true, 
+                    message: 'Please input project name!' }]}
+        >
             <Input />
         </Form.Item>
         <Form.Item {...tailLayout}>
@@ -103,6 +123,7 @@ const ProjectAdd = ()=>{
 const ProjectEdit = ()=>{   
     return (
         <>
+        <Nav />
         <h1>Edit Project</h1>
         </>
     )
@@ -111,6 +132,7 @@ const ProjectEdit = ()=>{
 const ProjectAssignments = ()=>{   
     return (
         <>
+        <Nav />
         <h1>Project Assignments</h1>
         </>
     )

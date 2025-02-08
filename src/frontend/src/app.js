@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRef } from 'react';
 import Timesheet from './timesheet';
-import { EmployeeAdd, EmployeeAssignments, EmployeeList } from './employee';
+import { EmployeeAdd, EmployeeEdit, EmployeeList } from './employee';
 import { ProjectAdd, ProjectList } from './project';
 
 const Nav= ()=>{
@@ -99,6 +99,7 @@ const Content= ()=>{
     <Timesheet />
     <EmployeeList />
     <EmployeeAdd />
+    <EmployeeEdit />
     <ProjectList />
     <ProjectAdd />
     </div>
@@ -106,16 +107,15 @@ const Content= ()=>{
 }
 
 const App= ()=>{
-
+/*
     const onunloadevent= (event)=>{
         event.preventDefault();    
     }
     window.onbeforeunload=onunloadevent;
-
+*/
     return (
         <div id="container">
             <Banner />
-            <Nav/>
             <Content />
             <Myinfo />
             <Footer />

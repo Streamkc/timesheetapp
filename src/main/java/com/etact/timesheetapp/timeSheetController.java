@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
@@ -42,6 +43,14 @@ public class TimesheetController{
         return ret;
     }
 
+    @PostMapping("/projectCreate")
+    public ProjectEntity projectCreate(
+        @RequestBody
+        ProjectEntity entry) {
+        ProjectEntity ret= service.addProject(entry);
+        return ret;
+    }
+
 	@GetMapping("/employeeList")	
     public List<EmployeeEntity> employeeList(){
         List<EmployeeEntity> ret= service.getEmployeeList();
@@ -56,9 +65,10 @@ public class TimesheetController{
     }
 
     @PostMapping("/employeeCreate")
-    public EmployeeEntity addEmployee(EmployeeEntity employee) throws URISyntaxException{
+    public EmployeeEntity addEmployee(
+        @RequestBody
+        EmployeeEntity employee) {
         EmployeeEntity ret= service.addEmployee(employee);
-        ResponseEntity.created(new URI("/employeeList/")).body(ret);
         return ret;
     }
 }

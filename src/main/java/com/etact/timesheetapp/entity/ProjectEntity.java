@@ -13,6 +13,14 @@ public class ProjectEntity {
     Long project_id;
     @Column(name = "project_name")
     String project_name;
+    
+    public ProjectEntity(){
+    }
+
+    public ProjectEntity(Long project_id, String project_name) {
+        this.project_id = project_id;
+        this.project_name = project_name;
+    }
 
     public Long getProject_id() {
         return project_id;

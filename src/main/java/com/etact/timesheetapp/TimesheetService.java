@@ -23,6 +23,17 @@ public class TimesheetService {
         return this.assignmentRepo.findAll();
     }
 
+    public AssignmentEntity findAssignment(Long id){
+        AssignmentEntity result= assignmentRepo.findById(id)
+            .orElseThrow(RuntimeException::new);
+        return result;
+    }
+
+    public AssignmentEntity addAssignment(AssignmentEntity entry){
+        AssignmentEntity result= assignmentRepo.save(entry);
+        return result;
+    }
+
     public List<ProjectEntity> getProjectList(){
         return this.projectRepo.findAll();
     }

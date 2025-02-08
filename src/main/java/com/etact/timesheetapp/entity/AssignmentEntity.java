@@ -12,12 +12,12 @@ import jakarta.persistence.Id;
 public class AssignmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int assignment_id;
+    Long assignment_id;
     @Column(name = "employee_id")
-    int employee_id;
+    Long employee_id;
     @Column(name = "project_id")
-    int project_id;
-    int number_of_hours;
+    Long project_id;
+    Long number_of_hours;
     Timestamp start_time;
     Timestamp end_time;
 }

@@ -12,11 +12,11 @@ import jakarta.persistence.Table;
 public class EmployeeEntity {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
-   Long employee_id;
+   private Long employee_id;
    @Column(name = "first_name")
-   String first_name; 
+   private String first_name; 
    @Column(name = "last_name")
-   String last_name; 
+   private String last_name; 
 
    public EmployeeEntity(){};
 

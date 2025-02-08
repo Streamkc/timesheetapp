@@ -7,15 +7,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.stereotype.Controller;
 
 import com.etact.timesheetapp.entity.EmployeeEntity;
+import com.etact.timesheetapp.entity.ProjectEntity;
 
-@Controller
+@RestController
 public class TimesheetController{
     @Autowired
     private TimesheetService service;
@@ -32,6 +34,12 @@ public class TimesheetController{
 	@RequestMapping("/welcome")	
     public String welcome(){
         return "welcome";
+    }
+
+	@GetMapping("/projectList")	
+    public List<ProjectEntity> projectList(){
+        List<ProjectEntity> ret= service.getProjectList();
+        return ret;
     }
 
 	@GetMapping("/employeeList")	

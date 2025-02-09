@@ -60,7 +60,12 @@ const EmployeeList = ()=>{
     return (
         <>
         <Nav />
-        <h2>Employee List</h2>
+        <h2
+            style={{
+                textAlign: "center",
+                margin: "20px"
+            }}
+        >Employee List</h2>
         <Table dataSource={list} columns={columns} />
         </>
     )
@@ -97,7 +102,14 @@ const EmployeeAdd = ()=>{
     return (
         <>
         <Nav />
-        <h3>Add Employee</h3>
+        <h2
+            style={{
+                textAlign: "center",
+                margin: "20px"
+            }}
+        >
+        Add Employee
+        </h2>
         <Form
             {...layout} 
             form={form}

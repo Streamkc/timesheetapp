@@ -70,7 +70,12 @@ const AssignmentList= ()=>{
     return (
         <>
         <Nav />
-        <h3>Assignment List</h3>
+        <h2
+        style={{
+            textAlign: "center",
+            margin: "20px"
+        }}
+        >Assignment List</h2>
         <Table dataSource={list} columns={columns} />
         </>
     )
@@ -92,11 +97,11 @@ const AssignmentAdd= ()=>{
                         "Content-Type":"application/json",
                     }
                 });
-            message.success("Assignment Added", 20);
+            message.success("Assignment Added", 3);
             console.log(values);       
             form.resetFields();
         }catch(error){
-            message.error("Assignment Not Added",20);
+            message.error("Assignment Not Added",3);
             console.log(error);
         }
     }
@@ -129,7 +134,14 @@ const AssignmentAdd= ()=>{
     return (
         <>
         <Nav />
-        <h3>Add Assignment</h3>
+        <h2
+        style={{
+            textAlign: "center",
+            margin: "20px"
+        }}
+        >
+            Add Assignment
+        </h2>
         <Form
             {...layout} 
             form={form}
@@ -138,7 +150,11 @@ const AssignmentAdd= ()=>{
                 maxWidth: 600,
             }}
         >
-        <Form.Item label="Employee ID " name="employee_id">
+        <Form.Item label="Employee ID " 
+                    name="employee_id"
+                    rules={[{ required: true, 
+                              message: 'Please choose employee!' }]}
+                    >
             <Select>
                 {
                     employeeList?.map((emp) => {
@@ -154,7 +170,12 @@ const AssignmentAdd= ()=>{
                 }
             </Select>
         </Form.Item>
-        <Form.Item label="Project ID" name="project_id">
+        <Form.Item 
+            label="Project ID" 
+            name="project_id"
+            rules={[{ required: true, 
+                      message: 'Please choose project!' }]}
+        >
             <Select>
                 {
                     projectList?.map((prj) => {
@@ -169,23 +190,25 @@ const AssignmentAdd= ()=>{
                 }
             </Select>   
         </Form.Item>
-        <Form.Item label="Start Date" name="start_time">
+        <Form.Item 
+            label="Start Date" 
+            name="start_time"
+            rules={[{ required: true, 
+                      message: 'Please input start date!' }]}
+            >
             <DatePicker />
         </Form.Item>
         <Form.Item 
             label="End Date" 
             name="end_time"
-            {...{
-                labelCol: {
-                    span: 8,
-                }
-            }}
+            rules={[{ required: true, 
+                      message: 'Please input end date!' }]}
         >
-            <Space>
-            <DatePicker {...{wrapperCol:{span:8},
+            <DatePicker {...{
+                            wrapperCol:{span:8},
                             labelCol: { span: 8, }
-                        }}/>
-            </Space>
+                        }}
+                        />
         </Form.Item>
         <Form.Item {...tailLayout}>
             <Space>

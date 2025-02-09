@@ -1,6 +1,7 @@
 package com.etact.timesheetapp;
 
 import java.util.List;
+import java.util.Optional;
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.etact.timesheetapp.entity.AssignmentEntity;
 import com.etact.timesheetapp.entity.EmployeeEntity;
 import com.etact.timesheetapp.entity.ProjectEntity;
+import com.etact.timesheetapp.vo.timesheetEmployeeVo;
 import com.etact.timesheetapp.vo.timesheetProjectVo;
 import com.etact.timesheetapp.vo.timesheetTallyVo;
 import com.etact.timesheetapp.EmployeeRepo;
@@ -23,6 +25,29 @@ public class TimesheetService {
 	private ProjectRepo projectRepo;
     @Autowired
     private AssignmentRepo assignmentRepo;
+
+    public timesheetEmployeeVo getEmployeeTallyVo(Long employee_id){
+        timesheetEmployeeVo ret=new timesheetEmployeeVo();
+        List<AssignmentEntity> list= assignmentRepo
+                            .findAllByEmployee_id(employee_id);
+        ret.setEmployee_id(employee_id);
+        Optional<EmployeeEntity> employee= employeeRepo.findById(employee_id); 
+        ret.setEmployee_name(employee.orElseThrow(RuntimeException::new)
+                                    .getFirst_name()
+                                +" "+employee
+                                    .orElseThrow(RuntimeException::new)
+                                    .getLast_name());
+        ret.setAssignment_count(Long.valueOf(list.size()));
+        ret.setMan_hr_spent(0L);
+        list.forEach(assignment->{
+            Timestamp start_time= assignment.getStart_time();
+            Timestamp end_time= assignment.getEnd_time();
+            Long time = (end_time.getTime()-start_time.getTime())/1000/60/60;
+            ret.setMan_hr_spent(
+                ret.getMan_hr_spent()+time
+        );});
+        return ret;
+    }
 
     public timesheetProjectVo getProjectTallyVo(
         Long project_id){
@@ -39,7 +64,6 @@ public class TimesheetService {
             Timestamp start_time= assignment.getStart_time();
             Timestamp end_time= assignment.getEnd_time();
             Long time = (end_time.getTime()-start_time.getTime())/1000/60/60;
-            System.out.println(time);
             ret.setMan_hr_spent(
                 ret.getMan_hr_spent()+time
             );});

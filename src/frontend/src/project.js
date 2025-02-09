@@ -52,7 +52,12 @@ const ProjectList = ()=>{
     return (
         <>
         <Nav />
-        <h2>Project List</h2>
+        <h2
+        style={{
+            textAlign: "center",
+            margin: "20px"
+        }}
+        >Project List</h2>
         <Table dataSource={list} columns={columns} />
         </>
     )
@@ -72,14 +77,14 @@ const ProjectAdd = ()=>{
                 }
             })
             .then(
-                message.success("Project Added", 10),
+                message.success("Project Added", 3),
                 console.log("Project Not Added")
             );
             console.log(values);
             form.resetFields();
         }
         catch(error){
-            message.error("Project Not Added",10);
+            message.error("Project Not Added",3);
         }
     }
 
@@ -98,7 +103,12 @@ const ProjectAdd = ()=>{
             }}
         >
         <Space>
-        <h2>Add Project</h2>
+        <h2
+        style={{
+            textAlign: "center",
+            margin: "20px"
+        }}
+        >Add Project</h2>
         </Space>
         <Form.Item 
             label="Project Name" 

@@ -63,6 +63,14 @@ const ProjectTally= ()=>{
     return (
         <>
         <Nav />
+        <h2
+            style={{
+                textAlign: "center",
+                margin: "20px"
+            }}
+        >
+        Project Timesheet
+        </h2>
         <Table dataSource={prjlist} columns={columns} />
         </>
     )
@@ -112,14 +120,72 @@ const columns = [
     )
 }
 
+const EmployeeTally= ()=>{
+    const columns = [
+        {
+            title: "Employee ID",
+            dataIndex: "employee_id",
+            key: "employee_id"
+        },
+        {
+            title: "Employee Name", 
+            dataIndex: "employee_name",
+            key: "employee_name"
+        },
+        {
+            title: "Assignment Total Count", 
+            dataIndex: "assignment_count",
+            key: "assignment_count"
+        },
+        {
+            title: "Man Hours Spent", 
+            dataIndex: "man_hr_spent",
+            key: "man_hr_spent"
+        },
+    ];
+    const [emplist, setEmpist] = useState([]);
+    const fetchList= async ()=>{  
+        try{
+            const response = await fetch("./timesheetEmployeeTally");
+            const data = await response.json();
+            setEmpist(data);
+            console.log(data);
+        }catch(error){
+            setEmpist([]);
+            console.log(error);
+        }
+    }
+    useEffect(()=>{
+        fetchList();
+    },[])
+    return(
+        <>
+        <Nav />
+        <h2
+            style={{
+                textAlign: "center",
+                margin: "20px"
+            }}
+        >
+        Timesheet by Employee
+        </h2>
+        <Table dataSource={emplist} columns={columns} />
+        </>
+    )
+}
+
 const Timesheet= ()=>{
 
     return (
         <>
         <Nav />
-        <h3>Timesheet</h3>
+        <h2
+        style={{
+            textAlign: "center",
+            margin: "20px"
+        }}
+        >Timesheet</h2>
         <TallyTable />
-        <ProjectTally />
         </>
     )
 }
@@ -127,5 +193,6 @@ const Timesheet= ()=>{
 export {
     Timesheet,
     TallyTable,
-    ProjectTally
+    ProjectTally,
+    EmployeeTally
 };

@@ -10,5 +10,6 @@ import com.etact.timesheetapp.entity.EmployeeEntity;
 @Repository
 public interface EmployeeRepo 
 extends CrudRepository<EmployeeEntity, Long> {
+    @SuppressWarnings("null")
     List<EmployeeEntity> findAll();
 }

@@ -8,5 +8,6 @@ import com.etact.timesheetapp.entity.ProjectEntity;
 @Repository
 public interface ProjectRepo 
 extends CrudRepository<ProjectEntity, Long> {
+    @SuppressWarnings("null")
     List<ProjectEntity> findAll();
 }

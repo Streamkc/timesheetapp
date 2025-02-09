@@ -10,8 +10,16 @@ const Nav= ()=>{
             label: <Link to='/' >Timesheet</Link>,
             children: [
                 {
-                    key: "report",
-                    label: <Link to='/projectTally' >Timesheet</Link>,
+                    key: "reportbyproject",
+                    label: <Link to='/projectTally' >
+                            Timesheet By Project
+                            </Link>,
+                },
+                {
+                    key: "reportbyemployee",
+                    label: <Link to='/employeeTally' >
+                            Timesheet By Employee
+                            </Link>,
                 },
             ]
         },
@@ -25,12 +33,6 @@ const Nav= ()=>{
                     key: "employeeCreate",
                     label: <Link to='/employeeCreatePage' >
                             New Employee
-                            </Link>,
-                },
-                {
-                    key: "employeeUpdate",
-                    label: <Link to='/employeeEditPage' >
-                            Update Employee
                             </Link>,
                 },
             ]

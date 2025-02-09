@@ -9,6 +9,7 @@ import com.etact.timesheetapp.entity.AssignmentEntity;
 @Repository
 public interface AssignmentRepo 
 extends CrudRepository<AssignmentEntity, Long> {
+    @SuppressWarnings("null")
     List<AssignmentEntity> findAll();
     @Query("SELECT a FROM AssignmentEntity a WHERE a.project_id = ?1")
     List<AssignmentEntity> findAllByProject_id(Long id);

@@ -3,7 +3,7 @@ import { Routes, Route, Link  } from 'react-router-dom';
 import { EmployeeAdd, EmployeeEdit, EmployeeList } from './employee';
 import { ProjectAdd, ProjectList } from './project';
 import { AssignmentList, AssignmentAdd } from './assignment';
-import { Timesheet, ProjectTally } from './timesheet';
+import { Timesheet, ProjectTally, EmployeeTally } from './timesheet';
 
 
 const Banner= ()=>{
@@ -93,6 +93,7 @@ const App= ()=>{
             <Routes>
                 <Route path="/" element={<Timesheet />} />
                 <Route path="/projectTally" element={<ProjectTally />} />
+                <Route path="/employeeTally" element={<EmployeeTally />} />
                 <Route path="/employeeListPage" element={<EmployeeList />} />
                 <Route path="/employeeCreatePage" element={<EmployeeAdd />} />
                 <Route path="/employeeEditPage" element={<EmployeeEdit />} />

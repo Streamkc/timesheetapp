@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.etact.timesheetapp.entity.AssignmentEntity;
 import com.etact.timesheetapp.entity.EmployeeEntity;
 import com.etact.timesheetapp.entity.ProjectEntity;
+import com.etact.timesheetapp.vo.timesheetEmployeeVo;
 import com.etact.timesheetapp.vo.timesheetProjectVo;
 import com.etact.timesheetapp.vo.timesheetTallyVo;
 
@@ -50,6 +51,17 @@ public class TimesheetController{
         service.getProjectList().forEach(project->{
             timesheetProjectVo projectVo= service
                                 .getProjectTallyVo(project.getProject_id());
+            ret.add(projectVo);
+        });
+        return ret;
+    }
+
+    @GetMapping("/timesheetEmployeeTally")	
+    public List<timesheetEmployeeVo> getTimesheetEmployeeTally(){
+        ArrayList<timesheetEmployeeVo> ret= new ArrayList<timesheetEmployeeVo>(); 
+        service.getEmployeeList().forEach(entry->{
+            timesheetEmployeeVo projectVo= service
+                                .getEmployeeTallyVo(entry.getEmployee_id());
             ret.add(projectVo);
         });
         return ret;
